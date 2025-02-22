@@ -4,7 +4,7 @@
 
 ![Network Topology](Images/LaZagne_Usage.png)
 
-- [Scenario Creation](https://github.com/4le26x/threat-hunting-scenario-tor/blob/main/threat-hunting-scenario-tor-event-creation.md)
+- [Scenario Creation](https://github.com/4le26x/threat-hunting-scenario-LaZagne/blob/main/threat-hunting-scenario-Lagzane-event-creation.md)
 
 
 
