@@ -2,6 +2,12 @@
 
 # **Threat Hunt Report: Unauthorized Credential Dumping with LaZagne**
 
+![Network Topology](Images/LaZagne_Usage.png)
+
+- [Scenario Creation](https://github.com/4le26x/threat-hunting-scenario-tor/blob/main/threat-hunting-scenario-tor-event-creation.md)
+
+
+
 ## **Scenario Creation**
 ### **Platforms and Languages Leveraged**
 - **Operating System:** Windows 10 Virtual Machines (Microsoft Azure)
@@ -38,9 +44,9 @@ DeviceFileEvents
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account = InitiatingProcessAccountName
 ```
 
-![[Pasted image 20250220112058.png]]
+![Confirming lazagne.exe was downloaded](Images/Image_1_LaZagne_Downloaded.png)
 
-### **Searched for antivirus exception**
+### **2. Searched for antivirus exception**
 
 
 
@@ -55,7 +61,7 @@ DeviceEvents
 | order by Timestamp desc
 ```
 
-![[Pasted image 20250220123200.png]]
+![Showing Windows Defender AV exclusion added by the attacker](Images/Image_2_Defender_AV_Exclusion.png)
 
 ### **. Searched the DeviceProcessEvents Table for LaZagne Execution**
 
@@ -71,7 +77,7 @@ DeviceProcessEvents
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
 ```
 
-![[Pasted image 20250220112411.png]]
+![Evidence of LaZagne execution in DeviceProcessEvents](Images/Image_3_LaZagne_Execution.png)
 
 
 
@@ -91,7 +97,7 @@ DeviceProcessEvents
 
 ```
 
-![[Pasted image 20250220112827.png]]
+![Execution of certutil.exe and curl.exe for data exfiltration](Images/Image_4_Data_Exfiltration_Certutil_Curl.png)
 
 
 ### **. Detecting Data Exfiltration via `curl.exe` or `certutil.exe`**
@@ -110,7 +116,7 @@ DeviceNetworkEvents
 | order by Timestamp desc
 ```
 
-![[Pasted image 20250220121921.png]]
+![Outbound network connection to webhook.site for credential exfiltration.](Images/Image_5_Network_Connection_Exfiltration.png)
 
 
 ### **5. Searched the DeviceFileEvents Table for Deletion of Evidence**
@@ -130,7 +136,7 @@ DeviceEvents
 | order by Timestamp desc
 ```
 
-![[Pasted image 20250220122939.png]]
+![PowerShell commands** used to delete evidence.](Images/Image_6_Evidence_Deletion_PowerShell.png)
 
 -------------
 
@@ -181,14 +187,6 @@ This confirms **unauthorized credential dumping, antivirus evasion, and external
 - **Author Name:** Alejandro Perez Hernandez
 - **Author Contact:** [LinkedIn](https://www.linkedin.com/in/alejandro-perez-hernandez-28158a120/)
 - **Date:** February 25, 2025
-
----
-
-## **Validation**
-
-|Reviewer Name|Reviewer Contact|Validation Date|
-|---|---|---|
-||||
 
 ---
 
